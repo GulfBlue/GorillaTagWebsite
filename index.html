@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Gorilla_Tag_Icon.png" type="image/png" preload="auto">
+  <title>Gorilla Creators</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7916394117202603"
+     crossorigin="anonymous"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      font-family: 'Courier New', Courier, monospace;
+      color: rgb(0, 140, 255);
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .gtagbutton {
+      font-size: 1em;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #008cff 0%, #005fa3 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 40px auto;
+      box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+      animation: arrowGlowPulse 2.2s infinite alternate;
+    }
+    .gtagbutton:hover {
+      background: linear-gradient(135deg, #005fa3 0%, #008cff 100%);
+      transform: scale(1.08);
+      box-shadow: 0 0 48px 16px rgba(0,140,255,0.75), 0 4px 18px rgba(0,140,255,0.18);
+      filter: brightness(1.2);
+      outline: none;
+      box-shadow: 0 0 60px 24px rgba(0,140,255,0.85), 0 4px 18px rgba(0,140,255,0.18);
+      filter: brightness(1.3);
+    }
+    .discord-container {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 10001;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      background: rgba(255,255,255,0.85);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      padding: 10px 14px 10px 14px;
+      min-width: 120px;
+    }
+    .discord-label {
+      font-size: 0.95em;
+      color: #23272A;
+      margin-bottom: 6px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .discord-btn {
+      background: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.98em;
+      padding: 7px 18px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 18px 4px rgba(88,101,242,0.25), 0 1px 4px rgba(0,0,0,0.10);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+      font-weight: 500;
+      margin: 0;
+      display: block;
+      animation: discordGlowPulse 2.2s infinite alternate;
+    }
+    .discord-btn:hover {
+      background: linear-gradient(135deg, #404EED 0%, #5865F2 100%);
+      transform: scale(1.08);
+      box-shadow: 0 0 48px 16px rgba(88,101,242,0.75), 0 4px 18px rgba(88,101,242,0.18);
+      filter: brightness(1.2);
+      outline: none;
+      box-shadow: 0 0 60px 24px rgba(88,101,242,0.85), 0 4px 18px rgba(88,101,242,0.18);
+      filter: brightness(1.3);
+    }
+    @keyframes discordGlowPulse {
+      0% {
+        box-shadow: 0 0 18px 4px rgba(88,101,242,0.25), 0 1px 4px rgba(0,0,0,0.10);
+      }
+      100% {
+        box-shadow: 0 0 32px 10px rgba(88,101,242,0.55), 0 1px 4px rgba(0,0,0,0.10);
+      }
+    }
+    .popup-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    }
+    .popup-content {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e3e6ee 100%);
+      padding: 18px 16px 16px 16px;
+      border-radius: 14px;
+      position: relative;
+      min-width: 220px;
+      min-height: 120px;
+      max-width: 90vw;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      text-align: center;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .popup-content h2 {
+      font-size: 1.2em;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #008cff;
+      letter-spacing: 0.5px;
+    }
+    .popup-content p {
+      font-size: 0.95em;
+      color: #333;
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+    .popup-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 2em;
+      background: none;
+      border: none;
+      color: #008cff;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      transition: color 0.2s;
+      z-index: 1;
+    }
+    .popup-close:hover {
+      color: #005fa3;
+    }
+    .video-player-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      background: rgba(20, 30, 40, 0.85);
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+      padding: 32px 36px;
+      width: fit-content;
+      margin: 40px auto;
+      position: relative;
+      z-index: 2;
+    }
+    #content-video {
+      display: block;
+      max-width: 70vw;
+      max-height: 70vh;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      background: #000;
+      border: 2px solid #008cff;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    #content-video:focus {
+      outline: none;
+      border-color: #005fa3;
+      box-shadow: 0 0 0 4px rgba(0,140,255,0.15);
+    }
+    .arrow-btn {
+      background: linear-gradient(135deg, #008cff 0%, #005fa3 100%);
+      border: none;
+      color: #fff;
+      font-size: 2.2em;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+      position: relative;
+      z-index: 2;
+      animation: arrowGlowPulse 2.2s infinite alternate;
+    }
+    @keyframes arrowGlowPulse {
+      0% {
+        box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
+      }
+      100% {
+        box-shadow: 0 0 32px 10px rgba(0,140,255,0.55), 0 2px 12px rgba(0,0,0,0.13);
+      }
+    }
+    .arrow-btn:hover {
+      background: linear-gradient(135deg, #005fa3 0%, #008cff 100%);
+      transform: scale(1.12);
+      box-shadow: 0 0 48px 16px rgba(0,140,255,0.75), 0 4px 18px rgba(0,140,255,0.18);
+      filter: brightness(1.2);
+    }
+    .arrow-btn:focus {
+      outline: none;
+      box-shadow: 0 0 60px 24px rgba(0,140,255,0.85), 0 4px 18px rgba(0,140,255,0.18);
+      filter: brightness(1.3);
+    }
+    .ad-container {
+      position: fixed;
+      top: 60px;
+      width: 120px;
+      min-height: 300px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      border-radius: 12px;
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .ad-left {
+      left: 12px;
+    }
+    .ad-right {
+      right: 12px;
+    }
+    @media (max-width: 900px) {
+      .ad-container {
+        display: none;
+      }
+    }
+  .site-footer {
+      width: 100vw;
+      background: linear-gradient(90deg, #005fa3 0%, #008cff 100%);
+      color: #fff;
+      text-align: center;
+      padding: 36px 16px 36px 16px;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      position: relative;
+      z-index: 10;
+      margin-top: 56px;
+      box-shadow: 0 -2px 16px rgba(0,140,255,0.10);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-content {
+      max-width: 650px;
+      width: 100%;
+      margin: 0 auto;
+      padding-bottom: 0;
+    }
+    .footer-content h3 {
+      margin: 0 0 12px 0;
+      font-size: 1.25em;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      font-family: 'Courier New', Courier, monospace;
+      text-shadow: 0 2px 8px rgba(0,140,255,0.18);
+    }
+    .footer-content p {
+      margin: 0;
+      font-size: 1.05em;
+      color: #e3e6ee;
+      line-height: 1.5;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      text-align: center;
+      padding: 0 8px;
+      text-shadow: 0 1px 6px rgba(0,140,255,0.10);
+    }
+    @media (max-width: 600px) {
+      .site-footer {
+        padding: 24px 4vw 24px 4vw;
+        min-height: 100px;
+      }
+      .footer-content {
+        max-width: 98vw;
+        padding: 0;
+      }
+      .footer-content p {
+        font-size: 0.98em;
+        padding: 0 2vw;
+      }
+    }
+    .discord-container {
+      margin-bottom: 80px;
+    }
+  </style>
+    
+</head>
+
+<body>
+  <div class="popup-modal" id="popup-modal" style="display: flex;">
+    <div class="popup-content">
+      <button class="popup-close" id="popup-close">&times;</button>
+      <h2>Disclaimer</h2>
+      <p>I do not own the videos shown. All rights belong to their respective owners.</p>
+    </div>
+  </div>
+  <video src="CHILLREDONE.mp4" autoplay loop muted id="bg-video"></video>
+  <div style="position: relative; z-index: 1;">
+    <h1>Gorilla Creators</h1>
+    <button class="gtagbutton" onclick="window.open('https://www.gorillatagvr.com', '_blank')">
+      Official Gorilla Tag Website
+    </button>
+    <div class="video-player-container">
+      <button class="arrow-btn" id="prev-video">&#8592;</button>
+      <video id="content-video" src="Edit1.mp4" autoplay loop controls></video>
+      <button class="arrow-btn" id="next-video">&#8594;</button>
+    </div>
+    <script>
+      // Popup modal logic
+      document.getElementById('popup-close').onclick = function() {
+        document.getElementById('popup-modal').style.display = 'none';
+      };
+
+      // Dynamically find available EditN.mp4 files
+      async function getAvailableVideos(maxCheck = 200) {
+        const testVideo = document.createElement('video');
+        const found = [];
+        for (let i = 1; i <= maxCheck; i++) {
+          const src = `Edit${i}.mp4`;
+          testVideo.src = src;
+          try {
+            await testVideo.load();
+            found.push(src);
+          } catch (e) {
+            break;
+          }
+        }
+        return found;
+      }
+
+      let videos = [];
+      let currentVideo = 0;
+      const videoElement = document.getElementById('content-video');
+      (async function() {
+        // Check up to 200 files, stop at first missing
+        videos = await getAvailableVideos(200);
+        if (videos.length > 0) {
+          currentVideo = 0;
+          videoElement.src = videos[currentVideo];
+          videoElement.load();
+          videoElement.play();
+        }
+      })();
+
+      document.getElementById('prev-video').onclick = function() {
+        if (videos.length === 0) return;
+        currentVideo--;
+        if (currentVideo < 0) currentVideo = videos.length - 1;
+        videoElement.pause();
+        videoElement.src = videos[currentVideo];
+        videoElement.load();
+        videoElement.currentTime = 0;
+        videoElement.play();
+      };
+      document.getElementById('next-video').onclick = function() {
+        if (videos.length === 0) return;
+        currentVideo++;
+        if (currentVideo >= videos.length) currentVideo = 0;
+        videoElement.pause();
+        videoElement.src = videos[currentVideo];
+        videoElement.load();
+        videoElement.currentTime = 0;
+        videoElement.play();
+      };
+    </script>
+  </div>
+  <div class="discord-container">
+    <div class="discord-label">Want your edits on the website?</div>
+    <a href="https://discord.gg/ksxHFuV94C" target="_blank" style="text-decoration: none;">
+      <button class="discord-btn">Join Discord</button>
+    </a>
+  </div>
+  <div class="ad-container ad-left">
+    <!-- Google AdSense Ad Unit -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7916394117202603"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <div class="ad-container ad-right">
+    <!-- Google AdSense Ad Unit -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7916394117202603"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-content">
+      <h3>About Gorilla Creators</h3>
+      <p>
+        Gorilla Creators is a community-driven website dedicated to showcasing the best edits, clips, and creative content from Gorilla Tag players. Explore amazing videos, join our Discord to submit your own edits, and connect with fellow creators. All rights to videos belong to their respective owners.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
