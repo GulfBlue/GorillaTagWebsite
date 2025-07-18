@@ -41,18 +41,39 @@
       cursor: pointer;
       display: block;
       margin: 40px auto;
-      box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
+      box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13);
       transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
-      animation: arrowGlowPulse 2.2s infinite alternate;
+      animation: buttonGlowMove 2.8s linear infinite alternate;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes buttonGlowMove {
+      0% { box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13); background-position: 0% 50%; }
+      100% { box-shadow: 0 0 48px 24px #008cffcc, 0 0 80px 32px #005fa3cc, 0 2px 12px rgba(0,0,0,0.13); background-position: 100% 50%; }
+    }
+    .gtagbutton::before {
+      content: "";
+      position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%, #fff 80%);
+      opacity: 0.25;
+      filter: blur(16px);
+      z-index: 0;
+      animation: buttonGlowMove 2.8s linear infinite alternate;
     }
     .gtagbutton:hover {
-      background: linear-gradient(135deg, #005fa3 0%, #008cff 100%);
-      transform: scale(1.08);
-      box-shadow: 0 0 48px 16px rgba(0,140,255,0.75), 0 4px 18px rgba(0,140,255,0.18);
-      filter: brightness(1.2);
+      background: linear-gradient(270deg, #005fa3 0%, #008cff 50%, #00ffe7 100%);
+      background-size: 200% 200%;
+      animation: buttonHoverMove 1.8s linear infinite;
+      transform: scale(1.08) rotate(-1deg);
+      box-shadow: 0 0 32px 8px #008cff55, 0 0 48px 16px #005fa355;
+      filter: brightness(1.08);
       outline: none;
-      box-shadow: 0 0 60px 24px rgba(0,140,255,0.85), 0 4px 18px rgba(0,140,255,0.18);
-      filter: brightness(1.3);
+    }
+    @keyframes buttonHoverMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
     .discord-container {
       position: fixed;
@@ -84,30 +105,39 @@
       padding: 7px 18px;
       border: none;
       border-radius: 8px;
-      box-shadow: 0 0 18px 4px rgba(88,101,242,0.25), 0 1px 4px rgba(0,0,0,0.10);
+      box-shadow: 0 0 24px 8px #5865F299, 0 0 48px 16px #404EED99, 0 1px 4px rgba(0,0,0,0.10);
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
       font-weight: 500;
       margin: 0;
       display: block;
-      animation: discordGlowPulse 2.2s infinite alternate;
+      animation: discordGlowMove 2.8s linear infinite alternate;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes discordGlowMove {
+      0% { box-shadow: 0 0 24px 8px #5865F299, 0 0 48px 16px #404EED99, 0 1px 4px rgba(0,0,0,0.10); background-position: 0% 50%; }
+      100% { box-shadow: 0 0 48px 24px #5865F2cc, 0 0 80px 32px #404EEDcc, 0 1px 4px rgba(0,0,0,0.10); background-position: 100% 50%; }
+    }
+    .discord-btn::before {
+      content: "";
+      position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #5865F2 0%, #404EED 100%, #fff 80%);
+      opacity: 0.25;
+      filter: blur(16px);
+      z-index: 0;
+      animation: discordGlowMove 2.8s linear infinite alternate;
     }
     .discord-btn:hover {
-      background: linear-gradient(135deg, #404EED 0%, #5865F2 100%);
-      transform: scale(1.08);
-      box-shadow: 0 0 48px 16px rgba(88,101,242,0.75), 0 4px 18px rgba(88,101,242,0.18);
-      filter: brightness(1.2);
+      background: linear-gradient(270deg, #404EED 0%, #5865F2 50%, #00ffe7 100%);
+      background-size: 200% 200%;
+      animation: buttonHoverMove 1.8s linear infinite;
+      transform: scale(1.08) rotate(1deg);
+      box-shadow: 0 0 32px 8px #5865F255, 0 0 48px 16px #404EED55;
+      filter: brightness(1.08);
       outline: none;
-      box-shadow: 0 0 60px 24px rgba(88,101,242,0.85), 0 4px 18px rgba(88,101,242,0.18);
-      filter: brightness(1.3);
-    }
-    @keyframes discordGlowPulse {
-      0% {
-        box-shadow: 0 0 18px 4px rgba(88,101,242,0.25), 0 1px 4px rgba(0,0,0,0.10);
-      }
-      100% {
-        box-shadow: 0 0 32px 10px rgba(88,101,242,0.55), 0 1px 4px rgba(0,0,0,0.10);
-      }
     }
     .popup-modal {
       position: fixed;
@@ -115,59 +145,113 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.7);
+      background: radial-gradient(circle at 50% 30%, rgba(0,140,255,0.18) 0%, rgba(0,0,0,0.85) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
       font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      animation: popupBgMove 6s linear infinite alternate;
+    }
+    @keyframes popupBgMove {
+      0% { background-position: 50% 30%; }
+      100% { background-position: 60% 70%; }
     }
     .popup-content {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e3e6ee 100%);
-      padding: 18px 16px 16px 16px;
-      border-radius: 14px;
+      background: linear-gradient(120deg, #0a1a2f 0%, #008cff 60%, #005fa3 100%);
+      padding: 24px 22px 22px 22px;
+      border-radius: 18px;
       position: relative;
-      min-width: 220px;
-      min-height: 120px;
-      max-width: 90vw;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      min-width: 260px;
+      min-height: 140px;
+      max-width: 92vw;
+      box-shadow: 0 0 32px 8px rgba(0,140,255,0.45), 0 4px 32px rgba(0,0,0,0.28);
       text-align: center;
       font-family: 'Roboto', Arial, Helvetica, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      border: 3px solid #008cff;
+      animation: popupAppear 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+      overflow: hidden;
+    }
+    @keyframes popupAppear {
+      0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+      60% { transform: scale(1.08) translateY(-8px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .popup-content::before {
+      content: "";
+      position: absolute;
+      top: -3px; left: -3px; right: -3px; bottom: -3px;
+      border-radius: 22px;
+      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%);
+      filter: blur(12px);
+      opacity: 0.7;
+      z-index: 0;
+      animation: popupGlowMove 2.5s linear infinite alternate;
+    }
+    @keyframes popupGlowMove {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
     }
     .popup-content h2 {
-      font-size: 1.2em;
+      font-size: 1.35em;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: #008cff;
+      margin-bottom: 8px;
+      color: #fff;
       letter-spacing: 0.5px;
+      text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3;
+      z-index: 1;
+      animation: textGlowPulse 2.2s infinite alternate;
+    }
+    @keyframes textGlowPulse {
+      0% { text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3; }
+      100% { text-shadow: 0 0 32px #008cff, 0 2px 16px #005fa3; }
     }
     .popup-content p {
-      font-size: 0.95em;
-      color: #333;
+      font-size: 1.05em;
+      color: #e3e6ee;
       margin-bottom: 0;
-      line-height: 1.3;
+      line-height: 1.4;
+      z-index: 1;
+      text-shadow: 0 0 8px #008cff33;
+      animation: shimmerText 3.5s linear infinite;
+      background: linear-gradient(90deg, #e3e6ee 60%, #008cff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes shimmerText {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
     .popup-close {
       position: absolute;
       top: 18px;
       right: 18px;
-      font-size: 2em;
+      font-size: 2.2em;
       background: none;
       border: none;
-      color: #008cff;
+      color: #fff;
       cursor: pointer;
       font-weight: bold;
       font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      transition: color 0.2s;
-      z-index: 1;
+      transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+      z-index: 2;
+      text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3;
+      animation: closeGlowPulse 1.8s infinite alternate;
+    }
+    @keyframes closeGlowPulse {
+      0% { text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3; }
+      100% { text-shadow: 0 0 32px #008cff, 0 2px 16px #005fa3; color: #008cff; }
     }
     .popup-close:hover {
-      color: #005fa3;
+      color: #008cff;
+      transform: scale(1.18) rotate(12deg);
+      text-shadow: 0 0 48px #008cff, 0 2px 24px #005fa3;
     }
     .video-player-container {
       display: flex;
@@ -209,31 +293,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
+      box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13);
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
       position: relative;
       z-index: 2;
-      animation: arrowGlowPulse 2.2s infinite alternate;
+      animation: arrowGlowMove 2.8s linear infinite alternate;
+      overflow: hidden;
     }
-    @keyframes arrowGlowPulse {
-      0% {
-        box-shadow: 0 0 18px 4px rgba(0,140,255,0.25), 0 2px 12px rgba(0,0,0,0.13);
-      }
-      100% {
-        box-shadow: 0 0 32px 10px rgba(0,140,255,0.55), 0 2px 12px rgba(0,0,0,0.13);
-      }
+    @keyframes arrowGlowMove {
+      0% { box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13); background-position: 0% 50%; }
+      100% { box-shadow: 0 0 48px 24px #008cffcc, 0 0 80px 32px #005fa3cc, 0 2px 12px rgba(0,0,0,0.13); background-position: 100% 50%; }
+    }
+    .arrow-btn::before {
+      content: "";
+      position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%, #fff 80%);
+      opacity: 0.25;
+      filter: blur(16px);
+      z-index: 0;
+      animation: arrowGlowMove 2.8s linear infinite alternate;
     }
     .arrow-btn:hover {
-      background: linear-gradient(135deg, #005fa3 0%, #008cff 100%);
-      transform: scale(1.12);
-      box-shadow: 0 0 48px 16px rgba(0,140,255,0.75), 0 4px 18px rgba(0,140,255,0.18);
-      filter: brightness(1.2);
+      background: linear-gradient(270deg, #005fa3 0%, #008cff 50%, #00ffe7 100%);
+      background-size: 200% 200%;
+      animation: buttonHoverMove 1.8s linear infinite;
+      transform: scale(1.12) rotate(-6deg);
+      box-shadow: 0 0 32px 8px #008cff55, 0 0 48px 16px #005fa355;
+      filter: brightness(1.08);
+      outline: none;
     }
     .arrow-btn:focus {
       outline: none;
-      box-shadow: 0 0 60px 24px rgba(0,140,255,0.85), 0 4px 18px rgba(0,140,255,0.18);
-      filter: brightness(1.3);
+      box-shadow: 0 0 120px 48px #008cffcc, 0 0 160px 64px #005fa3cc, 0 4px 18px rgba(0,140,255,0.18);
+      filter: brightness(1.4);
     }
     .ad-container {
       position: fixed;
@@ -333,7 +428,7 @@
       <p>I do not own the videos shown. All rights belong to their respective owners.</p>
     </div>
   </div>
-  <video src="CHILLREDONE.mp4" autoplay loop muted id="bg-video"></video>
+  <video src="WebsiteVideos/CHILLREDONE.mp4" autoplay loop muted id="bg-video"></video>
   <div style="position: relative; z-index: 1;">
     <h1>Gorilla Creators</h1>
     <button class="gtagbutton" onclick="window.open('https://www.gorillatagvr.com', '_blank')">
@@ -355,7 +450,7 @@
         const testVideo = document.createElement('video');
         const found = [];
         for (let i = 1; i <= maxCheck; i++) {
-          const src = `Edit${i}.mp4`;
+          const src = `Videos/Edit${i}.mp4`;
           testVideo.src = src;
           try {
             await testVideo.load();
@@ -417,9 +512,6 @@
          data-ad-slot="1234567890"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
   </div>
   <div class="ad-container ad-right">
     <!-- Google AdSense Ad Unit -->
@@ -429,10 +521,11 @@
          data-ad-slot="1234567890"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
   </div>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
   <footer class="site-footer">
     <div class="footer-content">
       <h3>About Gorilla Creators</h3>
