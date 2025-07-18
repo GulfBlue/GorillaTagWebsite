@@ -360,7 +360,7 @@
       background: linear-gradient(90deg, #005fa3 0%, #008cff 100%);
       color: #fff;
       text-align: center;
-      padding: 36px 16px 36px 16px;
+      padding: 36px 16px 72px 16px;
       font-family: 'Roboto', Arial, Helvetica, sans-serif;
       position: relative;
       z-index: 10;
@@ -415,6 +415,7 @@
     }
     .discord-container {
       margin-bottom: 80px;
+      position: fixed;
     }
   </style>
     
@@ -498,13 +499,23 @@
       };
     </script>
   </div>
-  <div class="discord-container">
-    <div class="discord-label">Want your edits on the website?</div>
-    <a href="https://discord.gg/ksxHFuV94C" target="_blank" style="text-decoration: none;">
-      <button class="discord-btn">Join Discord</button>
+  <!-- Stripe Payment Button -->
+  <div style="width:100%; display:flex; flex-direction:column; align-items:center; margin:32px 0; gap:18px;">
+    <a href="https://www.youtube.com/@GyroVr" target="_blank" style="text-decoration:none;">
+      <button style="display:flex;align-items:center;gap:10px;padding:10px 22px;font-size:1.1em;background:#ff2323;border-radius:8px;border:none;box-shadow:0 2px 12px #ff0000aa;cursor:pointer;transition:box-shadow 0.2s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" style="height:32px;width:32px;" />
+        <span style="color:#000000;font-weight:600;">Visit my YouTube</span>
+      </button>
+    </a>
+
+    <!-- Buy Me a Coffee Button -->
+    <a href="https://buymeacoffee.com/gyrovr" target="_blank" style="text-decoration:none;">
+      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height:50px; border-radius:8px; box-shadow:0 2px 12px #ffdd00aa; margin-top:4px;" />
     </a>
   </div>
-  
+
+  <!-- Replace the Stripe URL and Buy Me a Coffee username with your own -->
+
   <footer class="site-footer">
     <div class="footer-content">
       <h3>About Gorilla Creators</h3>
@@ -513,5 +524,22 @@
       </p>
     </div>
   </footer>
+
+  <div class="discord-container" style="position:fixed;bottom:18px;left:18px;z-index:10001;background:rgba(255,255,255,0.65);">
+    <div class="discord-label">Want your edits on the website?</div>
+    <a href="https://discord.gg/ksxHFuV94C" target="_blank" style="text-decoration: none;">
+      <button class="discord-btn">Join Discord</button>
+    </a>
+  </div>
+
+  <!-- Purchase Website Button -->
+  <!--<div id="purchase-website-container" style="position:fixed;bottom:18px;right:18px;z-index:10002;">
+    <button onclick="document.getElementById('purchase-website-container').style.display='none'" style="position:absolute;top:-12px;right:-12px;width:32px;height:32px;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #ff2323aa;font-size:1.5em;color:#ff2323;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10003;">&times;</button>
+    <a href="https://buy.stripe.com/test_7sI7uQ7Qp7gQbQw3cc" target="_blank" style="text-decoration:none;">
+      <button style="background:linear-gradient(135deg,#ffb700 0%,#ff2323 100%);color:#fff;font-size:1.08em;padding:12px 24px;border:none;border-radius:10px;box-shadow:0 2px 12px #ff2323aa,0 0 24px #ffb70099;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.15s;">
+        Want to purchase this website? <span style="margin-left:10px;background:#fff;color:#ff2323;padding:4px 10px;border-radius:6px;font-weight:700;">$150</span>
+      </button>
+    </a>
+  </div>-->
 </body>
 </html>
