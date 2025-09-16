@@ -779,56 +779,33 @@
     });
 
     // Video Navigation
-    let videos = [];
+    const videos = [];
+    for (let i = 1; i <= 100; i++) {
+      videos.push(`Videos/Edit${i}.mp4`);
+    }
     let currentVideo = 0;
     const videoElement = document.getElementById('content-video');
-    
-    async function getAvailableVideos(maxCheck = 200) {
-      const testVideo = document.createElement('video');
-      const found = [];
-      for (let i = 1; i <= maxCheck; i++) {
-        const src = `Videos/Edit${i}.mp4`;
-        testVideo.src = src;
-        try {
-          await testVideo.load();
-          found.push(src);
-        } catch (e) {
-          break;
-        }
-      }
-      return found;
-    }
 
-    (async function() {
-      videos = await getAvailableVideos(200);
-      if (videos.length > 0) {
-        currentVideo = 0;
-        videoElement.src = videos[currentVideo];
-        videoElement.load();
-        videoElement.play();
-      }
-    })();
-
-    document.getElementById('prev-video').onclick = function() {
+    function showVideo(index) {
       if (videos.length === 0) return;
-      currentVideo--;
+      currentVideo = index;
       if (currentVideo < 0) currentVideo = videos.length - 1;
-      videoElement.pause();
-      videoElement.src = videos[currentVideo];
-      videoElement.load();
-      videoElement.currentTime = 0;
-      videoElement.play();
-    };
-    
-    document.getElementById('next-video').onclick = function() {
-      if (videos.length === 0) return;
-      currentVideo++;
       if (currentVideo >= videos.length) currentVideo = 0;
       videoElement.pause();
       videoElement.src = videos[currentVideo];
       videoElement.load();
       videoElement.currentTime = 0;
       videoElement.play();
+    }
+
+    // Initialize first video
+    showVideo(0);
+
+    document.getElementById('prev-video').onclick = function() {
+      showVideo(currentVideo - 1);
+    };
+    document.getElementById('next-video').onclick = function() {
+      showVideo(currentVideo + 1);
     };
 
     // Enhanced Sign In/Up Modal Functions
