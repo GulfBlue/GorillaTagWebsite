@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="Gorilla_Tag_Icon.png" type="image/png" preload="auto">
   <title>Gorilla Creators</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7916394117202603"
-     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-    h1 {
-      text-align: center;
-      font-size: 2em;
-      font-family: 'Courier New', Courier, monospace;
-      color: rgb(0, 140, 255);
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
+    /* Base Styles */
     body {
       margin: 0;
       padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0a0e17;
+      color: white;
+      overflow-x: hidden;
     }
+    
+    /* Background Video */
     #bg-video {
       position: fixed;
       top: 0;
@@ -29,501 +25,669 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
+      opacity: 0.7;
     }
-    .gtagbutton {
-      font-size: 1em;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+    /* Main Content */
+    #main-content {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    
+    /* Header */
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin: 20px 0 40px;
+      background: linear-gradient(120deg, #5865F2 0%, #008cff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+      animation: textGlow 3s infinite alternate;
+    }
+    
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(88, 101, 242, 0.3); }
+      100% { text-shadow: 0 0 30px rgba(88, 101, 242, 0.6); }
+    }
+    
+    /* Sign In Button */
+    #signin-btn {
+      position: absolute;
+      top: 18px;
+      right: 24px;
       padding: 10px 20px;
-      background: linear-gradient(135deg, #008cff 0%, #005fa3 100%);
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    #signin-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    /* Log Out Button */
+    #logout-btn {
+      display: none;
+      position: static;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    
+    #logout-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    /* Change Name Button */
+    #change-name-btn {
+      display: none;
+      position: static;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    
+    #change-name-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    /* Gorilla Tag Website Button */
+    .gtagbutton {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      background: linear-gradient(135deg, #1a30c0 0%, #008cff 100%);
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      display: block;
-      margin: 40px auto;
-      box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
-      animation: buttonGlowMove 2.8s linear infinite alternate;
-      position: relative;
-      overflow: hidden;
+      font-weight: 600;
+      margin: 20px 0;
+      box-shadow: 0 4px 15px rgba(0, 140, 255, 0.3);
+      transition: all 0.3s ease;
     }
-    @keyframes buttonGlowMove {
-      0% { box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13); background-position: 0% 50%; }
-      100% { box-shadow: 0 0 48px 24px #008cffcc, 0 0 80px 32px #005fa3cc, 0 2px 12px rgba(0,0,0,0.13); background-position: 100% 50%; }
-    }
-    .gtagbutton::before {
-      content: "";
-      position: absolute;
-      top: -8px; left: -8px; right: -8px; bottom: -8px;
-      border-radius: 16px;
-      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%, #fff 80%);
-      opacity: 0.25;
-      filter: blur(16px);
-      z-index: 0;
-      animation: buttonGlowMove 2.8s linear infinite alternate;
-    }
+    
     .gtagbutton:hover {
-      background: linear-gradient(270deg, #005fa3 0%, #008cff 50%, #00ffe7 100%);
-      background-size: 200% 200%;
-      animation: buttonHoverMove 1.8s linear infinite;
-      transform: scale(1.08) rotate(-1deg);
-      box-shadow: 0 0 32px 8px #008cff55, 0 0 48px 16px #005fa355;
-      filter: brightness(1.08);
-      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 140, 255, 0.4);
     }
-    @keyframes buttonHoverMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+    
+    /* Video Player Container */
+    .video-player-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      background: rgba(20, 30, 40, 0.7);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      width: fit-content;
+      margin: 40px auto;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .discord-container {
-      position: fixed;
-      bottom: 18px;
-      left: 18px;
-      z-index: 10001;
+    
+    #content-video {
+      display: block;
+      max-width: 70vw;
+      max-height: 70vh;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: #000;
+      border: 2px solid #008cff;
+      transition: all 0.3s ease;
+    }
+    
+    /* Arrow Buttons */
+    .arrow-btn {
+      background: linear-gradient(135deg, #008cff 0%, #005fa3 100%);
+      border: none;
+      color: white;
+      font-size: 1.8em;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 140, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .arrow-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 140, 255, 0.5);
+    }
+    
+    /* Button Container */
+    .button-container {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      background: rgba(255,255,255,0.85);
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-      padding: 10px 14px 10px 14px;
-      min-width: 120px;
+      align-items: center;
+      margin: 40px 0;
+      gap: 20px;
     }
-    .discord-label {
-      font-size: 0.95em;
-      color: #23272A;
-      margin-bottom: 6px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
+    
+    /* YouTube Button */
+    .youtube-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      font-size: 1.1em;
+      background: #ff0000;
+      color: white;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
+    
+    .youtube-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    }
+    
+    /* Buy Me a Coffee Button */
+    .bmc-btn {
+      height: 50px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .bmc-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 221, 0, 0.4);
+    }
+    
+    /* Discord Button */
     .discord-btn {
       background: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.98em;
-      padding: 7px 18px;
+      color: white;
+      font-size: 1.08em;
+      padding: 12px 24px;
       border: none;
       border-radius: 8px;
-      box-shadow: 0 0 24px 8px #5865F299, 0 0 48px 16px #404EED99, 0 1px 4px rgba(0,0,0,0.10);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
       font-weight: 500;
-      margin: 0;
-      display: block;
-      animation: discordGlowMove 2.8s linear infinite alternate;
-      position: relative;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
-    @keyframes discordGlowMove {
-      0% { box-shadow: 0 0 24px 8px #5865F299, 0 0 48px 16px #404EED99, 0 1px 4px rgba(0,0,0,0.10); background-position: 0% 50%; }
-      100% { box-shadow: 0 0 48px 24px #5865F2cc, 0 0 80px 32px #404EEDcc, 0 1px 4px rgba(0,0,0,0.10); background-position: 100% 50%; }
-    }
-    .discord-btn::before {
-      content: "";
-      position: absolute;
-      top: -8px; left: -8px; right: -8px; bottom: -8px;
-      border-radius: 16px;
-      background: linear-gradient(120deg, #5865F2 0%, #404EED 100%, #fff 80%);
-      opacity: 0.25;
-      filter: blur(16px);
-      z-index: 0;
-      animation: discordGlowMove 2.8s linear infinite alternate;
-    }
+    
     .discord-btn:hover {
-      background: linear-gradient(270deg, #404EED 0%, #5865F2 50%, #00ffe7 100%);
-      background-size: 200% 200%;
-      animation: buttonHoverMove 1.8s linear infinite;
-      transform: scale(1.08) rotate(1deg);
-      box-shadow: 0 0 32px 8px #5865F255, 0 0 48px 16px #404EED55;
-      filter: brightness(1.08);
-      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
     }
-    .popup-modal {
+    
+    /* Footer */
+    .site-footer {
+      width: 100%;
+      background: linear-gradient(90deg, #005fa3 0%, #008cff 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      font-family: 'Roboto', sans-serif;
+      position: relative;
+      z-index: 10;
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .footer-content h3 {
+      margin: 0 0 16px 0;
+      font-size: 1.5em;
+      font-weight: 700;
+    }
+    
+    .footer-content p {
+      margin: 0;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    
+    /* Enhanced Sign In Modal */
+    #signin-modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at 50% 30%, rgba(0,140,255,0.18) 0%, rgba(0,0,0,0.85) 100%);
-      display: flex;
+      background: rgba(10, 15, 30, 0.9);
+      display: none;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      animation: popupBgMove 6s linear infinite alternate;
+      z-index: 20000;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.4s ease-out;
     }
-    @keyframes popupBgMove {
-      0% { background-position: 50% 30%; }
-      100% { background-position: 60% 70%; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .popup-content {
-      background: linear-gradient(120deg, #0a1a2f 0%, #008cff 60%, #005fa3 100%);
-      padding: 24px 22px 22px 22px;
-      border-radius: 18px;
+    
+    .cool-signin-form {
       position: relative;
-      min-width: 260px;
-      min-height: 140px;
-      max-width: 92vw;
-      box-shadow: 0 0 32px 8px rgba(0,140,255,0.45), 0 4px 32px rgba(0,0,0,0.28);
-      text-align: center;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      background: rgba(20, 25, 45, 0.95);
+      border-radius: 16px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      border: 3px solid #008cff;
-      animation: popupAppear 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+      gap: 24px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 12px 40px rgba(0, 100, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform: scale(0.95);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       overflow: hidden;
     }
-    @keyframes popupAppear {
-      0% { transform: scale(0.7) translateY(40px); opacity: 0; }
-      60% { transform: scale(1.08) translateY(-8px); opacity: 1; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
+    
+    #signin-modal.show .cool-signin-form {
+      transform: scale(1);
     }
-    .popup-content::before {
-      content: "";
+    
+    .cool-signin-form::before {
+      content: '';
       position: absolute;
-      top: -3px; left: -3px; right: -3px; bottom: -3px;
-      border-radius: 22px;
-      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%);
-      filter: blur(12px);
-      opacity: 0.7;
-      z-index: 0;
-      animation: popupGlowMove 2.5s linear infinite alternate;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(88, 101, 242, 0.3),
+        rgba(0, 140, 255, 0.6),
+        rgba(88, 101, 242, 0.3),
+        transparent
+      );
+      animation: rotateBorder 6s linear infinite;
+      z-index: -1;
     }
-    @keyframes popupGlowMove {
-      0% { opacity: 0.7; }
-      100% { opacity: 1; }
+    
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-    .popup-content h2 {
-      font-size: 1.35em;
+    
+    .cool-signin-title {
+      font-size: 1.8em;
       font-weight: 700;
-      margin-bottom: 8px;
-      color: #fff;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3;
-      z-index: 1;
-      animation: textGlowPulse 2.2s infinite alternate;
-    }
-    @keyframes textGlowPulse {
-      0% { text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3; }
-      100% { text-shadow: 0 0 32px #008cff, 0 2px 16px #005fa3; }
-    }
-    .popup-content p {
-      font-size: 1.05em;
-      color: #e3e6ee;
-      margin-bottom: 0;
-      line-height: 1.4;
-      z-index: 1;
-      text-shadow: 0 0 8px #008cff33;
-      animation: shimmerText 3.5s linear infinite;
-      background: linear-gradient(90deg, #e3e6ee 60%, #008cff 100%);
-      background-clip: text;
+      color: white;
+      margin: 0 0 10px 0;
+      text-align: center;
+      background: linear-gradient(90deg, #5865F2, #008cff);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    @keyframes shimmerText {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-    .popup-close {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      font-size: 2.2em;
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-weight: bold;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
-      z-index: 2;
-      text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3;
-      animation: closeGlowPulse 1.8s infinite alternate;
-    }
-    @keyframes closeGlowPulse {
-      0% { text-shadow: 0 0 16px #008cff, 0 2px 8px #005fa3; }
-      100% { text-shadow: 0 0 32px #008cff, 0 2px 16px #005fa3; color: #008cff; }
-    }
-    .popup-close:hover {
-      color: #008cff;
-      transform: scale(1.18) rotate(12deg);
-      text-shadow: 0 0 48px #008cff, 0 2px 24px #005fa3;
-    }
-    .video-player-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      background: rgba(20, 30, 40, 0.85);
-      border-radius: 18px;
-      box-shadow: 0 6px 32px rgba(0,0,0,0.18);
-      padding: 32px 36px;
-      width: fit-content;
-      margin: 40px auto;
+    
+    .input-group {
       position: relative;
-      z-index: 2;
+      width: 100%;
     }
-    #content-video {
-      display: block;
-      max-width: 70vw;
-      max-height: 70vh;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-      background: #000;
-      border: 2px solid #008cff;
-      transition: box-shadow 0.2s, border-color 0.2s;
+    
+    .cool-signin-input, .cool-signup-input {
+      padding: 14px 16px 14px 40px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(10, 15, 25, 0.7);
+      color: white;
+      width: 100%;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
     }
-    #content-video:focus {
+    
+    .cool-signin-input:focus {
       outline: none;
-      border-color: #005fa3;
-      box-shadow: 0 0 0 4px rgba(0,140,255,0.15);
+      border-color: #5865F2;
+      box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2);
     }
-    .arrow-btn {
-      background: linear-gradient(135deg, #008cff 0%, #005fa3 100%);
-      border: none;
-      color: #fff;
-      font-size: 2.2em;
-      border-radius: 50%;
-      width: 54px;
-      height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+    
+    .input-group {
       position: relative;
-      z-index: 2;
-      animation: arrowGlowMove 2.8s linear infinite alternate;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.2em;
+      pointer-events: none;
+    }
+    
+    .cool-signin-btn {
+      padding: 14px 24px;
+      font-size: 1.1em;
+      background: linear-gradient(135deg, #5865F2 0%, #008cff 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      position: relative;
       overflow: hidden;
     }
-    @keyframes arrowGlowMove {
-      0% { box-shadow: 0 0 24px 8px #008cff99, 0 0 48px 16px #005fa399, 0 2px 12px rgba(0,0,0,0.13); background-position: 0% 50%; }
-      100% { box-shadow: 0 0 48px 24px #008cffcc, 0 0 80px 32px #005fa3cc, 0 2px 12px rgba(0,0,0,0.13); background-position: 100% 50%; }
-    }
-    .arrow-btn::before {
-      content: "";
+    
+    .cool-signin-btn::before {
+      content: '';
       position: absolute;
-      top: -8px; left: -8px; right: -8px; bottom: -8px;
-      border-radius: 50%;
-      background: linear-gradient(120deg, #008cff 0%, #005fa3 100%, #fff 80%);
-      opacity: 0.25;
-      filter: blur(16px);
-      z-index: 0;
-      animation: arrowGlowMove 2.8s linear infinite alternate;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
     }
-    .arrow-btn:hover {
-      background: linear-gradient(270deg, #005fa3 0%, #008cff 50%, #00ffe7 100%);
-      background-size: 200% 200%;
-      animation: buttonHoverMove 1.8s linear infinite;
-      transform: scale(1.12) rotate(-6deg);
-      box-shadow: 0 0 32px 8px #008cff55, 0 0 48px 16px #005fa355;
-      filter: brightness(1.08);
-      outline: none;
+    
+    .cool-signin-btn:hover::before {
+      left: 100%;
     }
-    .arrow-btn:focus {
-      outline: none;
-      box-shadow: 0 0 120px 48px #008cffcc, 0 0 160px 64px #005fa3cc, 0 4px 18px rgba(0,140,255,0.18);
-      filter: brightness(1.4);
+    
+    .cool-signin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(88, 101, 242, 0.4);
     }
-    .ad-container {
+    
+    .cool-signin-btn:active {
+      transform: translateY(0);
+    }
+    
+    .cool-signin-cancel {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      align-self: center;
+    }
+    
+    .cool-signin-cancel:hover {
+      color: #008cff;
+    }
+    
+    .cool-signin-message {
+      color: #ff6b6b;
+      font-size: 0.9em;
+      text-align: center;
+      margin-top: -10px;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .signin-footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+    }
+    
+    .signin-footer a {
+      color: #008cff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .signin-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Sign Up Modal */
+    #signup-modal {
+      display: none;
       position: fixed;
-      top: 60px;
-      width: 120px;
-      min-height: 300px;
-      background: rgba(255,255,255,0.95);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      border-radius: 12px;
-      z-index: 10002;
-      display: flex;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 15, 30, 0.9);
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      z-index: 20001;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.4s ease-out;
     }
-    .ad-left {
-      left: 12px;
-    }
-    .ad-right {
-      right: 12px;
-    }
-    @media (max-width: 900px) {
-      .ad-container {
-        display: none;
-      }
-    }
-  .site-footer {
-      width: 100vw;
-      background: linear-gradient(90deg, #005fa3 0%, #008cff 100%);
-      color: #fff;
-      text-align: center;
-      padding: 36px 16px 72px 16px;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    
+    .cool-signup-form {
       position: relative;
-      z-index: 10;
-      margin-top: 56px;
-      box-shadow: 0 -2px 16px rgba(0,140,255,0.10);
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
-      min-height: 120px;
+      background: rgba(20, 25, 45, 0.95);
+      border-radius: 16px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
+      gap: 24px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 12px 40px rgba(0, 100, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform: scale(0.95);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+    
+    #signup-modal.show .cool-signup-form {
+      transform: scale(1);
+    }
+    
+    .cool-signup-form::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(88, 101, 242, 0.3),
+        rgba(0, 140, 255, 0.6),
+        rgba(88, 101, 242, 0.3),
+        transparent
+      );
+      animation: rotateBorder 6s linear infinite;
+      z-index: -1;
+    }
+    
+    .cool-signup-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 10px 0;
+      text-align: center;
+      background: linear-gradient(90deg, #5865F2, #008cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Change Name Modal */
+    #changename-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 15, 30, 0.9);
       align-items: center;
       justify-content: center;
+      z-index: 20002;
+      backdrop-filter: blur(8px);
     }
-    .footer-content {
-      max-width: 650px;
-      width: 100%;
-      margin: 0 auto;
-      padding-bottom: 0;
-    }
-    .footer-content h3 {
-      margin: 0 0 12px 0;
-      font-size: 1.25em;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.5px;
-      font-family: 'Courier New', Courier, monospace;
-      text-shadow: 0 2px 8px rgba(0,140,255,0.18);
-    }
-    .footer-content p {
-      margin: 0;
-      font-size: 1.05em;
-      color: #e3e6ee;
-      line-height: 1.5;
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      text-align: center;
-      padding: 0 8px;
-      text-shadow: 0 1px 6px rgba(0,140,255,0.10);
-    }
-    @media (max-width: 600px) {
-      .site-footer {
-        padding: 24px 4vw 24px 4vw;
-        min-height: 100px;
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
       }
-      .footer-content {
-        max-width: 98vw;
-        padding: 0;
+      
+      .video-player-container {
+        flex-direction: column;
+        padding: 20px;
       }
+      
+      #content-video {
+        max-width: 90vw;
+        margin: 20px 0;
+      }
+      
+      .arrow-btn {
+        margin: 10px 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      #signin-btn {
+        top: 10px;
+        right: 10px;
+        font-size: 0.9em;
+        padding: 8px 16px;
+      }
+      
+      .gtagbutton, .youtube-btn, .discord-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+      }
+      
       .footer-content p {
-        font-size: 0.98em;
-        padding: 0 2vw;
+        font-size: 1em;
       }
-    }
-    .discord-container {
-      margin-bottom: 80px;
-      position: fixed;
+      
+      .cool-signin-form {
+        padding: 30px 20px;
+      }
+      
+      .cool-signin-title {
+        font-size: 1.5em;
+      }
+      
+      .cool-signin-input, .cool-signup-input {
+        padding: 12px 16px 12px 42px;
+      }
+      
+      .input-icon {
+        font-size: 1em;
+        left: 14px;
+      }
     }
   </style>
-    
 </head>
-
 <body>
-  <div class="popup-modal" id="popup-modal" style="display: flex;">
-    <div class="popup-content">
-      <button class="popup-close" id="popup-close">&times;</button>
-      <h2>Disclaimer</h2>
-      <p>I do not own the videos shown. All rights belong to their respective owners.</p>
-    </div>
-  </div>
+  <!-- Background Video -->
   <video src="WebsiteVideos/CHILLREDONE.mp4" autoplay loop muted id="bg-video"></video>
-  <div style="position: relative; z-index: 1;">
+  
+  <!-- Main Content -->
+  <div id="main-content">
     <h1>Gorilla Creators</h1>
+    <div style="position:absolute;top:18px;right:24px;display:flex;align-items:center;gap:12px;z-index:10;">
+      <button id="signin-btn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      <button id="logout-btn" style="display:none;">Log Out</button>
+      <button id="change-name-btn" style="display:none;">Change Name</button>
+      <span id="display-name-plaque" style="display:none;padding:10px 20px;font-size:1em;background:rgba(88,101,242,0.15);color:white;border-radius:8px;font-weight:600;backdrop-filter:blur(5px);border:1px solid rgba(88,101,242,0.3);margin-left:8px;"></span>
+    </div>
     <button class="gtagbutton" onclick="window.open('https://www.gorillatagvr.com', '_blank')">
       Official Gorilla Tag Website
     </button>
+    
     <div class="video-player-container">
       <button class="arrow-btn" id="prev-video">&#8592;</button>
       <video id="content-video" src="Edit1.mp4" autoplay loop controls></video>
       <button class="arrow-btn" id="next-video">&#8594;</button>
     </div>
-    <script>
-      // Popup modal logic
-      document.getElementById('popup-close').onclick = function() {
-        document.getElementById('popup-modal').style.display = 'none';
-      };
+    
+    <div class="button-container">
+      <a href="https://www.youtube.com/@GyroVr" target="_blank" class="youtube-btn">
+        <i class="fab fa-youtube"></i>
+        <span>Visit my YouTube</span>
+      </a>
 
-      // Dynamically find available EditN.mp4 files
-      async function getAvailableVideos(maxCheck = 200) {
-        const testVideo = document.createElement('video');
-        const found = [];
-        for (let i = 1; i <= maxCheck; i++) {
-          const src = `Videos/Edit${i}.mp4`;
-          testVideo.src = src;
-          try {
-            await testVideo.load();
-            found.push(src);
-          } catch (e) {
-            break;
-          }
-        }
-        return found;
-      }
+      <a href="https://buymeacoffee.com/gyrovr" target="_blank">
+        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" class="bmc-btn" />
+      </a>
 
-      let videos = [];
-      let currentVideo = 0;
-      const videoElement = document.getElementById('content-video');
-      (async function() {
-        // Check up to 200 files, stop at first missing
-        videos = await getAvailableVideos(200);
-        if (videos.length > 0) {
-          currentVideo = 0;
-          videoElement.src = videos[currentVideo];
-          videoElement.load();
-          videoElement.play();
-        }
-      })();
-
-      document.getElementById('prev-video').onclick = function() {
-        if (videos.length === 0) return;
-        currentVideo--;
-        if (currentVideo < 0) currentVideo = videos.length - 1;
-        videoElement.pause();
-        videoElement.src = videos[currentVideo];
-        videoElement.load();
-        videoElement.currentTime = 0;
-        videoElement.play();
-      };
-      document.getElementById('next-video').onclick = function() {
-        if (videos.length === 0) return;
-        currentVideo++;
-        if (currentVideo >= videos.length) currentVideo = 0;
-        videoElement.pause();
-        videoElement.src = videos[currentVideo];
-        videoElement.load();
-        videoElement.currentTime = 0;
-        videoElement.play();
-      };
-    </script>
-  </div>
-  <!-- Stripe Payment Button -->
-  <div style="width:100%; display:flex; flex-direction:column; align-items:center; margin:32px 0; gap:18px;">
-    <a href="https://www.youtube.com/@GyroVr" target="_blank" style="text-decoration:none;">
-      <button style="display:flex;align-items:center;gap:10px;padding:10px 22px;font-size:1.1em;background:#ff2323;border-radius:8px;border:none;box-shadow:0 2px 12px #ff0000aa;cursor:pointer;transition:box-shadow 0.2s;">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" style="height:32px;width:32px;" />
-        <span style="color:#000000;font-weight:600;">Visit my YouTube</span>
-      </button>
-    </a>
-
-    <!-- Buy Me a Coffee Button -->
-    <a href="https://buymeacoffee.com/gyrovr" target="_blank" style="text-decoration:none;">
-      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height:50px; border-radius:8px; box-shadow:0 2px 12px #ffdd00aa; margin-top:4px;" />
-    </a>
-
-    <!-- Join Discord Button -->
-    <a href="https://discord.gg/ksxHFuV94C" target="_blank" style="text-decoration: none; margin-top:8px;">
-      <button class="discord-btn" style="background:linear-gradient(135deg,#1a30c0 0%,#4f58bd 100%);color:#fff;font-size:1.08em;padding:11px 24px;border:none;border-radius:9px;box-shadow:0 0 4px 2px #5865F244,0 1px 4px #404EED22,0 1px 4px rgba(0,0,0,0.08);font-weight:500;font-family:'Roboto',Arial,Helvetica,sans-serif;letter-spacing:0.5px;display:flex;align-items:center;gap:12px;filter:brightness(1.02);">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="height:30px;width:30px;filter:none;" />
-        <span style="text-shadow:0 1px 2px #404EED22;">Join Discord</span>
-      </button>
-    </a>
+      <a href="https://discord.gg/ksxHFuV94C" target="_blank" class="discord-btn">
+        <i class="fab fa-discord"></i>
+        <span>Join Discord</span>
+      </a>
+    </div>
   </div>
 
-  <!-- Replace the Stripe URL and Buy Me a Coffee username with your own -->
-
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
       <h3>About Gorilla Creators</h3>
@@ -533,16 +697,328 @@
     </div>
   </footer>
 
-  <!-- Removed leftover white spot from old Discord button -->
+  <!-- Enhanced Sign In Modal -->
+  <div id="signin-modal">
+    <form id="signin-form" class="cool-signin-form">
+      <h2 class="cool-signin-title">Welcome Back</h2>
+      
+      <div class="input-group">
+        <i class="fas fa-envelope input-icon"></i>
+        <input type="email" id="signin-email" placeholder="Email Address" class="cool-signin-input" required />
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="signin-password" placeholder="Password" class="cool-signin-input" required />
+      </div>
+      
+      <button type="submit" class="cool-signin-btn">Sign In</button>
+      <div id="signin-message" class="cool-signin-message"></div>
+      
+      <button type="button" class="cool-signin-cancel" onclick="closeSignInModal()">Cancel</button>
+      
+      <div class="signin-footer">
+        Don't have an account? <a href="#" onclick="showSignUp();return false;">Sign up</a>
+      </div>
+    </form>
+  </div>
 
-  <!-- Purchase Website Button -->
-  <!--<div id="purchase-website-container" style="position:fixed;bottom:18px;right:18px;z-index:10002;">
-    <button onclick="document.getElementById('purchase-website-container').style.display='none'" style="position:absolute;top:-12px;right:-12px;width:32px;height:32px;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #ff2323aa;font-size:1.5em;color:#ff2323;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10003;">&times;</button>
-    <a href="https://buy.stripe.com/test_7sI7uQ7Qp7gQbQw3cc" target="_blank" style="text-decoration:none;">
-      <button style="background:linear-gradient(135deg,#ffb700 0%,#ff2323 100%);color:#fff;font-size:1.08em;padding:12px 24px;border:none;border-radius:10px;box-shadow:0 2px 12px #ff2323aa,0 0 24px #ffb70099;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.15s;">
-        Want to purchase this website? <span style="margin-left:10px;background:#fff;color:#ff2323;padding:4px 10px;border-radius:6px;font-weight:700;">$150</span>
-      </button>
-    </a>
-  </div>-->
+  <!-- Sign Up Modal -->
+  <div id="signup-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,15,30,0.9);align-items:center;justify-content:center;z-index:20001;backdrop-filter:blur(8px);">
+    <form id="signup-form" class="cool-signin-form">
+      <h2 class="cool-signin-title">Create Account</h2>
+      
+      <div class="input-group">
+        <i class="fas fa-envelope input-icon"></i>
+        <input type="email" id="signup-email" placeholder="Email Address" class="cool-signin-input" required />
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="signup-password" placeholder="Password" class="cool-signin-input" required />
+      </div>
+      
+      <button type="submit" class="cool-signin-btn">Sign Up</button>
+      <div id="signup-message" class="cool-signin-message"></div>
+      
+      <button type="button" class="cool-signin-cancel" onclick="closeSignUpModal()">Cancel</button>
+      
+      <div class="signin-footer">
+        Already have an account? <a href="#" onclick="showSignIn();return false;">Sign in</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Change Name Modal -->
+  <div id="changename-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,15,30,0.9);align-items:center;justify-content:center;z-index:20002;backdrop-filter:blur(8px);">
+    <form id="changename-form" class="cool-signin-form">
+      <h2 class="cool-signin-title">Change Display Name</h2>
+      <div class="input-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" id="changename-input" placeholder="New Display Name" class="cool-signin-input" required />
+      </div>
+      <button type="submit" class="cool-signin-btn">Save Name</button>
+      <div id="changename-message" class="cool-signin-message"></div>
+      <button type="button" class="cool-signin-cancel" onclick="closeChangeNameModal()">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    // Initialize main content animation
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('main-content').style.opacity = 1;
+        document.getElementById('main-content').style.transform = 'translateY(0)';
+      }, 200);
+      
+      // Check for saved session
+      const savedEmail = localStorage.getItem('signedInEmail');
+      if (savedEmail) {
+        updateSignInUI(savedEmail);
+      }
+    });
+
+    // Video Navigation
+    let videos = [];
+    let currentVideo = 0;
+    const videoElement = document.getElementById('content-video');
+    
+    async function getAvailableVideos(maxCheck = 200) {
+      const testVideo = document.createElement('video');
+      const found = [];
+      for (let i = 1; i <= maxCheck; i++) {
+        const src = `Videos/Edit${i}.mp4`;
+        testVideo.src = src;
+        try {
+          await testVideo.load();
+          found.push(src);
+        } catch (e) {
+          break;
+        }
+      }
+      return found;
+    }
+
+    (async function() {
+      videos = await getAvailableVideos(200);
+      if (videos.length > 0) {
+        currentVideo = 0;
+        videoElement.src = videos[currentVideo];
+        videoElement.load();
+        videoElement.play();
+      }
+    })();
+
+    document.getElementById('prev-video').onclick = function() {
+      if (videos.length === 0) return;
+      currentVideo--;
+      if (currentVideo < 0) currentVideo = videos.length - 1;
+      videoElement.pause();
+      videoElement.src = videos[currentVideo];
+      videoElement.load();
+      videoElement.currentTime = 0;
+      videoElement.play();
+    };
+    
+    document.getElementById('next-video').onclick = function() {
+      if (videos.length === 0) return;
+      currentVideo++;
+      if (currentVideo >= videos.length) currentVideo = 0;
+      videoElement.pause();
+      videoElement.src = videos[currentVideo];
+      videoElement.load();
+      videoElement.currentTime = 0;
+      videoElement.play();
+    };
+
+    // Enhanced Sign In/Up Modal Functions
+    function openSignInModal() {
+      const modal = document.getElementById('signin-modal');
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+    }
+
+    function closeSignInModal() {
+      const modal = document.getElementById('signin-modal');
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    }
+
+    function showSignUp() {
+      closeSignInModal();
+      setTimeout(() => {
+        document.getElementById('signup-modal').style.display = 'flex';
+      }, 350);
+    }
+
+    function closeSignUpModal() {
+      document.getElementById('signup-modal').style.display = 'none';
+    }
+
+    function showSignIn() {
+      closeSignUpModal();
+      setTimeout(() => {
+        openSignInModal();
+      }, 350);
+    }
+
+    // Change Name Modal Functions
+    function openChangeNameModal() {
+      document.getElementById('changename-modal').style.display = 'flex';
+    }
+    function closeChangeNameModal() {
+      document.getElementById('changename-modal').style.display = 'none';
+    }
+
+    // User management (localStorage demo)
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('users') || '{}');
+    }
+
+    function saveUser(email, password) {
+      const users = getUsers();
+      users[email] = password;
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function validateUser(email, password) {
+      const users = getUsers();
+      return users[email] && users[email] === password;
+    }
+
+    // Update sign-in button and log out/change name buttons
+    function updateSignInUI(email) {
+      const btn = document.getElementById('signin-btn');
+      const logoutBtn = document.getElementById('logout-btn');
+      const changeNameBtn = document.getElementById('change-name-btn');
+      const plaque = document.getElementById('display-name-plaque');
+      if (email) {
+        let displayName = localStorage.getItem('displayName');
+        if (!displayName) displayName = email.split('@')[0];
+        btn.style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        changeNameBtn.style.display = 'inline-block';
+        plaque.textContent = displayName;
+        plaque.style.display = 'inline-block';
+      } else {
+        btn.style.display = 'inline-block';
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        btn.style.background = 'rgba(255, 255, 255, 0.1)';
+        btn.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+        logoutBtn.style.display = 'none';
+        changeNameBtn.style.display = 'none';
+        plaque.style.display = 'none';
+      }
+    }
+
+    document.getElementById('signin-btn').onclick = openSignInModal;
+
+    document.getElementById('logout-btn').onclick = function() {
+      localStorage.removeItem('signedInEmail');
+      updateSignInUI(null);
+    };
+
+    document.getElementById('signin-form').onsubmit = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('signin-email').value.trim();
+      const password = document.getElementById('signin-password').value.trim();
+      const msg = document.getElementById('signin-message');
+
+      if (!email || !password) {
+        msg.textContent = 'Please fill in all fields';
+        msg.style.display = 'block';
+        return;
+      }
+
+      if (!validateUser(email, password)) {
+        msg.textContent = 'Invalid email or password';
+        msg.style.display = 'block';
+        return;
+      }
+
+      // Simulate successful login
+      msg.style.color = '#4CAF50';
+      msg.textContent = 'Signing in...';
+      msg.style.display = 'block';
+
+      setTimeout(() => {
+        localStorage.setItem('signedInEmail', email);
+        msg.textContent = 'Login successful! Redirecting...';
+        
+        setTimeout(() => {
+          closeSignInModal();
+          updateSignInUI(email);
+          msg.style.display = 'none';
+        }, 1000);
+      }, 1500);
+    };
+
+    document.getElementById('signup-form').onsubmit = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
+      const msg = document.getElementById('signup-message');
+
+      if (!email || !password) {
+        msg.textContent = 'Please fill in all fields';
+        msg.style.display = 'block';
+        return;
+      }
+
+      const users = getUsers();
+      if (users[email]) {
+        msg.textContent = 'Email already registered';
+        msg.style.display = 'block';
+        return;
+      }
+
+      saveUser(email, password);
+      msg.style.color = '#4CAF50';
+      msg.textContent = 'Account created! You can now sign in.';
+      msg.style.display = 'block';
+
+      setTimeout(() => {
+        closeSignUpModal();
+        openSignInModal();
+        msg.style.display = 'none';
+      }, 1200);
+    };
+
+    document.getElementById('change-name-btn').onclick = openChangeNameModal;
+
+    document.getElementById('changename-form').onsubmit = function(e) {
+      e.preventDefault();
+      const newName = document.getElementById('changename-input').value.trim();
+      const msg = document.getElementById('changename-message');
+      if (!newName) {
+        msg.textContent = 'Please enter a name';
+        msg.style.display = 'block';
+        return;
+      }
+      localStorage.setItem('displayName', newName);
+      msg.style.color = '#4CAF50';
+      msg.textContent = 'Name updated!';
+      msg.style.display = 'block';
+      setTimeout(() => {
+        closeChangeNameModal();
+        updateSignInUI(localStorage.getItem('signedInEmail'));
+        msg.style.display = 'none';
+      }, 1000);
+    };
+
+    // On page load, check session
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('main-content').style.opacity = 1;
+        document.getElementById('main-content').style.transform = 'translateY(0)';
+      }, 200);
+      const savedEmail = localStorage.getItem('signedInEmail');
+      updateSignInUI(savedEmail);
+    });
+  </script>
 </body>
 </html>
